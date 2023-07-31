@@ -10,9 +10,7 @@ CREATE TABLE HR.COUNTRIES (
   COUNTRY_ID      CHAR(2)          NOT NULL,
   COUNTRY_NAME    VARCHAR2(40)         NULL,
   REGION_ID       NUMBER               NULL
-)
-ORGANIZATION INDEX
-;
+);
 
 COMMENT ON TABLE HR.COUNTRIES IS 'country table. Contains 25 rows. References with locations table.';
 
