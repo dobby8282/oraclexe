@@ -1333,3 +1333,6 @@ INSERT INTO HR.REGIONS
   (REGION_ID, REGION_NAME)
 VALUES
   (4, 'Middle East and Africa');
+
+
+COMMIT;
