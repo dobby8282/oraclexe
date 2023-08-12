@@ -71,5 +71,45 @@ ORDER BY e.salary DESC
 직원의 ID(employee_id), 직원의 성(last_name), 그리고 해당 직원의 급여(salary) 조회하기.
 직원들의 급여(salary)가 해당 부서의 평균 급여보다 높은 직원들을 조회합니다.
 결과는 부서 이름과 직원의 급여가 높은 순으로 정렬됩니다.
+
 */
+SELECT d.department_id, d.department_name, d.manager_id, m.last_name AS M_LAST_NAME,
+    e.employee_id, e.last_name AS W_LAST_NAME, e.salary
+FROM departments d
+JOIN employees m ON d.manager_id = m.employee_id
+JOIN employees e ON d.department_id = e.department_id
+WHERE 1 = 1
+--AND d.department_id > 100
+AND e.salary > (
+            -- 각 부서의 평균 급여 
+            SELECT AVG(e1.salary)
+            FROM employees e1
+            WHERE e1.department_id = d.department_id
+            )
+ORDER BY d.department_name, e.salary DESC
+;
+
+SELECT d.department_id, d.department_name, d.manager_id, m.last_name AS M_LAST_NAME,
+    e.employee_id, e.last_name AS W_LAST_NAME, e.salary
+FROM departments d
+JOIN employees m ON d.manager_id = m.employee_id
+JOIN employees e ON d.department_id = e.department_id
+JOIN (
+    SELECT department_id, AVG(salary) AS Avg_Salary
+    FROM employees 
+    GROUP BY department_id
+    ) da
+ON d.department_id = da.department_id
+WHERE e.salary > da.Avg_Salary
+ORDER BY d.department_name, e.salary DESC
+;
+
+
+
+
+
+
+
+
+
 
