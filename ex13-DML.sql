@@ -190,9 +190,14 @@ COMMIT;
 /*
 SELECT 문의 FOR UPDATE 절
     FOR UPDATE 는 특정 레코드를 잠금(lock) 처리하는 SQL구문입니다.
-
-
+    COMMIT 또는 ROLLBACK 잠금해제 합니다.
 */
+SELECT employee_id, salary, job_id
+FROM employees
+WHERE job_id = 'SA_REP'
+FOR UPDATE;
+
+commit;
 
 
 
