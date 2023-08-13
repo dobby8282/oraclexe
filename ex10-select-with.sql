@@ -34,7 +34,7 @@ AND d.department_id = 20
 
 -- WITH 절로 계층표현
 WITH RecursiveCTE (id, name, manager_id, depth) AS (
-    SELECT employee_id, last_name, manager_id, 0
+    SELECT employee_id, last_name, manager_id, 1
     FROM employees
     WHERE manager_id IS NULL -- 최상위 매니저
     UNION ALL
