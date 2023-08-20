@@ -26,8 +26,6 @@ SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 2. AUTOTRACE
 SQL*Plus에서 사용되며, 쿼리의 실행 계획과 성능에 관한 통계를 생성합니다.
 디스크 읽기, 메모리 읽기 등의 성능 통계 정보를 제공합니다.
-
-
 */
 SET AUTOTRACE ON;
 
@@ -52,8 +50,6 @@ GRANT SELECT ON V_$SESSION TO tuning;
 GRANT SELECT ON V_$SQL_PLAN_STATISTICS_ALL TO tuning;
 GRANT SELECT ON V_$SQL TO tuning;
 GRANT SELECT ANY DICTIONARY TO tuning;
-
-
 
 
 */
