@@ -9,7 +9,6 @@ FROM products
 WHERE prodno = 11000;
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(NULL, NULL, 'ALLSTATS LAST'));
 
-
 SELECT /*+ FULL(p) */ *
 FROM products p
 WHERE prodno = 11000;
@@ -68,7 +67,6 @@ INDEX RANGE SCAN(MIN/MAX)
 DROP INDEX products_idx;
 CREATE INDEX products_idx ON products(psize, price);
 
-
 SELECT /*+ INDEX(products products_idx) */ MAX(price) FROM products
 WHERE psize = 'XL';
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(NULL, NULL, 'ALLSTATS LAST -ROWS'));
@@ -103,27 +101,29 @@ SELECT COUNT(*) FROM orders;
 
 CREATE INDEX orders_custno_idx ON orders(custno);
 
+-- 33556
 SELECT /*+ FULL(orders) */ MAX(orderdate)
 FROM orders
 WHERE custno BETWEEN 1 AND 100;
-
+  
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(NULL, NULL, 'ALLSTATS LAST'));
 
-
+-- 956
 SELECT /*+ INDEX(orders orders_custno_idx) */ MAX(orderdate)
 FROM orders
 WHERE custno BETWEEN 1 AND 100;
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(NULL, NULL, 'ALLSTATS LAST'));
 
-
+-- 333556
 SELECT /*+ FULL(orders) */ MAX(orderdate)
 FROM orders
-WHERE custno BETWEEN 1 AND 5000;
+WHERE custno BETWEEN 1 AND 20000;
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(NULL, NULL, 'ALLSTATS LAST'));
 
+-- 100K
 SELECT /*+ INDEX(orders orders_custno_idx) */ MAX(orderdate)
 FROM orders
-WHERE custno BETWEEN 1 AND 5000;
+WHERE custno BETWEEN 1 AND 20000;
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(NULL, NULL, 'ALLSTATS LAST'));
 
 
