@@ -32,7 +32,7 @@ WHERE owner != 'SYS';
 -- dba_tables: 데이터베이스의 모든 테이블 정보 조회 (DBA 권한 필요)
 SELECT owner, table_name, num_rows
 FROM dba_tables
-WHERE owner != 'SYS';
+WHERE owner = 'HR';
 
 -- dba_views: 데이터베이스의 모든 뷰 정보 조회 (DBA 권한 필요)
 SELECT owner, view_name, text
@@ -65,11 +65,11 @@ FROM v$version
 WHERE banner LIKE 'Oracle%';
 
 -- v$process: 프로세스 정보 조회
-SELECT spid, osuser, program, terminal
+SELECT *
 FROM v$process;
 
 -- v$lock: 락 정보 조회
-SELECT session_id, type, mode, block, ctime
+SELECT *
 FROM v$lock
 WHERE block = 1;
 
@@ -78,7 +78,7 @@ SELECT event#, name
 FROM v$event_name;
 
 -- v$open_cursor: 열려 있는 커서 정보 조회
-SELECT user_name, machine, cursor_type, sql_text
+SELECT *
 FROM v$open_cursor
 WHERE user_name IS NOT NULL;
 
